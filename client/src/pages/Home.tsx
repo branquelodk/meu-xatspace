@@ -41,7 +41,7 @@ type Profile = {
 };
 
 const STORAGE_KEY = "meu-xatspace-profile-v1";
-const HERO_IMAGE = "/manus-storage/xatspace-night-sky_97b23052.png";
+const HERO_IMAGE = "/manus-storage/xatspace-night-sky-male_acaddd14.png";
 const DEFAULT_PROFILE: Profile = {
   name: "seu nome aqui",
   location: "em algum lugar do universo",
