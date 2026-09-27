@@ -50,8 +50,8 @@ const DEFAULT_PROFILE: Profile = {
   about: "Gosto de anime, música boa e conversas que viram madrugada. Este cantinho ainda está esperando um pouco de você — toque em “Editar espaço” e deixe tudo com a sua cara. ✦",
   anime: "um favorito para preencher",
   music: "a trilha sonora da minha vida",
-  radioName: "Minha rádio",
-  radioUrl: "",
+  radioName: "Radio Hits Brasil",
+  radioUrl: "https://sbox1.sonybox.top:9012/live",
   songName: "Música favorita",
   songUrl: "",
   instagram: "",
@@ -61,7 +61,16 @@ const DEFAULT_PROFILE: Profile = {
 function readProfile(): Profile {
   try {
     const saved = localStorage.getItem(STORAGE_KEY);
-    return saved ? { ...DEFAULT_PROFILE, ...JSON.parse(saved) } : DEFAULT_PROFILE;
+    if (!saved) return DEFAULT_PROFILE;
+    const profile = { ...DEFAULT_PROFILE, ...JSON.parse(saved) } as Profile;
+    if (!profile.radioUrl && profile.radioName === "Minha rádio") {
+      profile.radioName = DEFAULT_PROFILE.radioName;
+      profile.radioUrl = DEFAULT_PROFILE.radioUrl;
+    }
+    if (profile.radioUrl === "http://sbox1.sonybox.top:9012/live") {
+      profile.radioUrl = DEFAULT_PROFILE.radioUrl;
+    }
+    return profile;
   } catch {
     return DEFAULT_PROFILE;
   }
